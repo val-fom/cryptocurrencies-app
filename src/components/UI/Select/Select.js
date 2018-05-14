@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class FiatCurrencySelect extends Component {
+export default class Select extends Component {
   state = {
     value: 'USD',
   };
@@ -8,15 +8,17 @@ export default class FiatCurrencySelect extends Component {
   handleChange = e => {
     const { value } = e.target;
     this.setState({ value });
-    this.props.onFiatCurrencyChange(value);
+    this.props.onChange(value);
   };
 
   render() {
     return (
       <select value={this.state.value} onChange={this.handleChange}>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="RUB">RUB</option>
+        {this.props.options.map(option => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
       </select>
     );
   }

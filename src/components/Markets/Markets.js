@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 import { API_SERVICE } from '../../api/coinmarketcap';
 
-import FiatCurrencySelect from '../FiatCurrencySelect';
-import Ticker from '../Ticker';
+import FiatCurrencySelect from '../UI/Select';
+import Ticker from './Ticker';
+
+const FIAT_CURRENCIES = ['USD', 'EUR', 'RUB'];
 
 export default class Markets extends Component {
   state = {
@@ -31,7 +33,7 @@ export default class Markets extends Component {
 
     return (
       <section className="section section__markets">
-        <FiatCurrencySelect onFiatCurrencyChange={this.onFiatCurrencyChange} />
+        <FiatCurrencySelect options={FIAT_CURRENCIES} onChange={this.onFiatCurrencyChange} />
         <Ticker tickerData={tickerData} fiatCurrency={fiatCurrency} />
       </section>
     );
