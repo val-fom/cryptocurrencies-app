@@ -9,14 +9,15 @@ class ApiService {
     };
   }
 
+  // TODO: getTopTen refactor
   getTicker(currency) {
-    const queries = currency ? `?convert=${currency}&limit=6` : '?limit=6';
-    return this._get(this.END_POINTS.ticker, queries);
+    const query = currency ? `?convert=${currency}&limit=10` : '?limit=10';
+    return this._get(this.END_POINTS.ticker, query);
   }
 
-  _get(endpoint, queries) {
+  _get(endpoint, query) {
     const headers = new Headers({ accept: 'application/json' });
-    return fetch(`${this.BASE_API_URL}/${endpoint}/${queries}`, { headers })
+    return fetch(`${this.BASE_API_URL}/${endpoint}/${query}`, { headers })
       .then(status)
       .then(json)
       .catch(console.error);

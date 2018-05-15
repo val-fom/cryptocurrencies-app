@@ -14,8 +14,8 @@ export default class Select extends Component {
   render() {
     return (
       <select value={this.state.value} onChange={this.handleChange}>
-        {this.props.options.map(option => (
-          <option key={option} value={option}>
+        {this.props.options.map((option, i) => (
+          <option key={i} value={option}>
             {option}
           </option>
         ))}
