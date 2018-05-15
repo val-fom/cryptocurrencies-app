@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 
-import { API_SERVICE } from '../../api/coinmarketcap';
-import { getFilteredTickerData } from '../../utils';
-import { FIAT_CURRENCIES, CRYPTO_CURRENCIES } from '../../constants';
+import { getTickerOfTopSix } from '../../api';
+import { FIAT_CURRENCIES } from '../../constants';
 
 import Select from '../UI/Select';
 import Ticker from './Ticker';
 
 export default class Markets extends Component {
   state = {
-    tickerData: {},
-    fiatCurrency: FIAT_CURRENCIES[0],
+    tickerData: null,
+    currentFiatCurrency: 'USD',
   };
 
   componentDidMount() {
-    this.getTickerData(this.state.fiatCurrency);
+    this.getTickerData(this.state.currentFiatCurrency);
   }
 
   onFiatCurrencyChange = fiatCurrency => {
@@ -22,19 +21,18 @@ export default class Markets extends Component {
   };
 
   getTickerData(fiatCurrency) {
-    API_SERVICE.getTicker(fiatCurrency).then(result => {
-      const filteredTickerData = getFilteredTickerData(
-        result.data,
-        CRYPTO_CURRENCIES
-      );
-
-      this.setState({ tickerData: filteredTickerData, fiatCurrency });
+    getTickerOfTopSix(fiatCurrency).then(result => {
+      this.setState({
+        tickerData: result.data,
+        currentFiatCurrency: fiatCurrency,
+      });
     });
   }
 
   render() {
-    const { tickerData, fiatCurrency } = this.state;
-    console.log('tickerData: ', tickerData);
+    const { tickerData, currentFiatCurrency } = this.state;
+
+    if (!tickerData) return null;
 
     return (
       <section className="section section__markets">
@@ -42,7 +40,10 @@ export default class Markets extends Component {
           options={FIAT_CURRENCIES}
           onChange={this.onFiatCurrencyChange}
         />
-        <Ticker tickerData={tickerData} fiatCurrency={fiatCurrency} />
+        <Ticker
+          tickerData={tickerData}
+          currentFiatCurrency={currentFiatCurrency}
+        />
       </section>
     );
   }

@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 
-import { API_SERVICE } from '../../api/coinmarketcap';
-import {
-  getFilteredTickerData,
-  mapTickerDataByName,
-  convert,
-} from '../../utils';
-import { FIAT_CURRENCIES, CRYPTO_CURRENCIES } from '../../constants';
+import { getTickerOfTopSix } from '../../api';
+import { convert } from '../../utils';
+import { FIAT_CURRENCIES } from '../../constants';
 
 import Select from '../UI/Select';
 import CurrencyInput from './CurrencyInput';
+import CryptoCurrencySelect from './CryptoCurrencySelect';
 
 export default class Converter extends Component {
   state = {
     tickerData: null,
-    currentCryptoCurrency: CRYPTO_CURRENCIES[0],
-    currentFiatCurrency: FIAT_CURRENCIES[0],
+    currentCryptoCurrencyId: 1,
+    currentFiatCurrency: 'USD',
     baseAmount: '',
     baseCurrency: 'crypto',
   };
@@ -28,20 +25,13 @@ export default class Converter extends Component {
     this.getTickerData(fiatCurrency);
   };
 
-  onCryptoCurrencyChange = currentCryptoCurrency =>
-    this.setState({ currentCryptoCurrency });
+  onCryptoCurrencyChange = currentCryptoCurrencyId =>
+    this.setState({ currentCryptoCurrencyId });
 
   getTickerData(fiatCurrency) {
-    API_SERVICE.getTicker(fiatCurrency).then(result => {
-      const filteredTickerData = getFilteredTickerData(
-        result.data,
-        CRYPTO_CURRENCIES
-      );
-
-      const tickerDataMappedByName = mapTickerDataByName(filteredTickerData);
-
+    getTickerOfTopSix(fiatCurrency).then(result => {
       this.setState({
-        tickerData: tickerDataMappedByName,
+        tickerData: result.data,
         currentFiatCurrency: fiatCurrency,
       });
     });
@@ -59,15 +49,14 @@ export default class Converter extends Component {
     const {
       baseAmount,
       baseCurrency,
-      currentCryptoCurrency,
+      currentCryptoCurrencyId,
       currentFiatCurrency,
       tickerData,
     } = this.state;
-    console.log('this.state: ', this.state);
 
     if (!tickerData) return null;
 
-    const { price } = tickerData[currentCryptoCurrency].quotes[
+    const { price } = tickerData[currentCryptoCurrencyId].quotes[
       currentFiatCurrency
     ];
 
@@ -85,11 +74,11 @@ export default class Converter extends Component {
         <fieldset>
           <CurrencyInput
             value={cryptoValue}
-            currency={currentCryptoCurrency}
+            currency={tickerData[currentCryptoCurrencyId].name}
             onValueChange={this.handleCryptoValueChange}
           />
-          <Select
-            options={CRYPTO_CURRENCIES}
+          <CryptoCurrencySelect
+            tickerData={tickerData}
             onChange={this.onCryptoCurrencyChange}
           />
         </fieldset>

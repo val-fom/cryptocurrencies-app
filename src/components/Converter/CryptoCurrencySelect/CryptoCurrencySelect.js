@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-export default class Select extends Component {
+export default class CryptoCurrencySelect extends Component {
   state = {
-    value: 'USD',
+    value: 1,
   };
 
   handleChange = e => {
@@ -12,11 +12,13 @@ export default class Select extends Component {
   };
 
   render() {
+    const { tickerData } = this.props;
+
     return (
       <select value={this.state.value} onChange={this.handleChange}>
-        {this.props.options.map(option => (
-          <option key={option} value={option}>
-            {option}
+        {Object.keys(tickerData).map(coinId => (
+          <option key={coinId} value={coinId}>
+            {tickerData[coinId].name}
           </option>
         ))}
       </select>
