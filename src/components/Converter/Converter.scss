@@ -1,0 +1,19 @@
+.converter__section {
+	display: flex;
+	flex-wrap: wrap;
+	.select {
+		margin-left: 5px;
+		flex: 1 1 30%;
+		height: 24px;
+		font-size: 14px;
+	}
+}
+
+.converter__wrapper {
+	display: flex;
+	flex: 1 1 100%;
+	border: none;
+	padding: 0;
+	margin: 0;
+	flex-wrap: wrap;
+}

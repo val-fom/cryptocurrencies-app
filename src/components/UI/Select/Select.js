@@ -13,7 +13,11 @@ export default class Select extends Component {
 
   render() {
     return (
-      <select value={this.state.value} onChange={this.handleChange}>
+      <select
+        className="select"
+        value={this.state.value}
+        onChange={this.handleChange}
+      >
         {this.props.options.map(option => (
           <option key={option} value={option}>
             {option}

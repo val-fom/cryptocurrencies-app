@@ -6,6 +6,8 @@ import { FIAT_CURRENCIES } from '../../constants';
 import Select from '../UI/Select';
 import Ticker from './Ticker';
 
+import './Markets.css';
+
 export default class Markets extends Component {
   state = {
     tickerData: null,
@@ -35,7 +37,9 @@ export default class Markets extends Component {
     if (!tickerData) return null;
 
     return (
-      <section className="section section__markets">
+      <section className="section markets__section">
+        <header className="section__header">Markets</header>
+
         <Select
           options={FIAT_CURRENCIES}
           onChange={this.onFiatCurrencyChange}

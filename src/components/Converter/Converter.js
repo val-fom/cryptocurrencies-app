@@ -8,6 +8,8 @@ import Select from '../UI/Select';
 import CurrencyInput from './CurrencyInput';
 import CryptoCurrencySelect from './CryptoCurrencySelect';
 
+import './Converter.css';
+
 export default class Converter extends Component {
   state = {
     tickerData: null,
@@ -66,12 +68,12 @@ export default class Converter extends Component {
       baseCurrency === 'crypto' ? convert(baseAmount, price) : baseAmount;
 
     return (
-      <section className="section section__converter">
-        <header className="converter__header">
+      <section className="section converter__section">
+        <header className="section__header">
           Cryptocurrency Converter Calculator
         </header>
 
-        <fieldset>
+        <div className="converter__wrapper">
           <CurrencyInput
             value={cryptoValue}
             currency={tickerData[currentCryptoCurrencyId].name}
@@ -81,9 +83,9 @@ export default class Converter extends Component {
             tickerData={tickerData}
             onChange={this.onCryptoCurrencyChange}
           />
-        </fieldset>
+        </div>
 
-        <fieldset>
+        <div className="converter__wrapper">
           <CurrencyInput
             value={fiatValue}
             currency={currentFiatCurrency}
@@ -93,7 +95,7 @@ export default class Converter extends Component {
             options={FIAT_CURRENCIES}
             onChange={this.onFiatCurrencyChange}
           />
-        </fieldset>
+        </div>
       </section>
     );
   }

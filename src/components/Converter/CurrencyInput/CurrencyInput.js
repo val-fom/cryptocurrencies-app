@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import './CurrencyInput.css';
 
 export default class CurrencyInput extends Component {
   handleChange = ev => {
@@ -11,8 +12,15 @@ export default class CurrencyInput extends Component {
 
     return (
       <Fragment>
-        <legend>Enter {currency} amount:</legend>
-        <input value={value} onChange={this.handleChange} />
+        <label className="currency-input__label">
+          Enter {currency} amount:
+        </label>
+        <input
+          type="number"
+          className="currency-input"
+          value={value}
+          onChange={this.handleChange}
+        />
       </Fragment>
     );
   }

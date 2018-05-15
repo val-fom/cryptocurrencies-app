@@ -15,7 +15,11 @@ export default class CryptoCurrencySelect extends Component {
     const { tickerData } = this.props;
 
     return (
-      <select value={this.state.value} onChange={this.handleChange}>
+      <select
+        className="select"
+        value={this.state.value}
+        onChange={this.handleChange}
+      >
         {Object.keys(tickerData).map(coinId => (
           <option key={coinId} value={coinId}>
             {tickerData[coinId].name}
