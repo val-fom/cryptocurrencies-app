@@ -6,38 +6,30 @@ import { FIAT_CURRENCIES, CRYPTO_CURRENCIES } from '../../constants';
 
 import Select from '../UI/Select';
 import CurrencyInput from './CurrencyInput';
-import CryptoCurrencySelect from './CryptoCurrencySelect';
 
 import './Converter.css';
 
 export default class Converter extends Component {
   state = {
-    tickerData: null,
-    currentCryptoCurrencyId: 1,
-    currentFiatCurrency: 'USD',
-    baseAmount: '',
+    prices: null,
+    currentCryptoCurrency: CRYPTO_CURRENCIES[0],
+    currentFiatCurrency: FIAT_CURRENCIES[0],
+    baseAmount: '1',
     baseCurrency: 'crypto',
   };
 
   componentDidMount() {
-    this.getTickerData(this.state.currentFiatCurrency);
-  }
-
-  onFiatCurrencyChange = fiatCurrency => {
-    this.getTickerData(fiatCurrency);
-  };
-
-  onCryptoCurrencyChange = currentCryptoCurrencyId =>
-    this.setState({ currentCryptoCurrencyId });
-
-  getTickerData(fiatCurrency) {
-    api.getPrices(CRYPTO_CURRENCIES, [fiatCurrency]).then(result => {
-      this.setState({
-        tickerData: result.data,
-        currentFiatCurrency: fiatCurrency,
-      });
+    api.getPrices(CRYPTO_CURRENCIES, FIAT_CURRENCIES).then(prices => {
+      console.log('prices: ', prices);
+      this.setState({ prices });
     });
   }
+
+  onFiatCurrencyChange = currentFiatCurrency =>
+    this.setState({ currentFiatCurrency });
+
+  onCryptoCurrencyChange = currentCryptoCurrency =>
+    this.setState({ currentCryptoCurrency });
 
   handleCryptoValueChange = baseAmount => {
     this.setState({ baseCurrency: 'crypto', baseAmount });
@@ -48,21 +40,17 @@ export default class Converter extends Component {
   };
 
   render() {
-    // return null; // TODO:
-
     const {
       baseAmount,
       baseCurrency,
-      currentCryptoCurrencyId,
+      currentCryptoCurrency,
       currentFiatCurrency,
-      tickerData,
+      prices,
     } = this.state;
 
-    if (!tickerData) return null;
+    if (!prices) return null;
 
-    const { price } = tickerData[currentCryptoCurrencyId].quotes[
-      currentFiatCurrency
-    ];
+    const price = prices[currentCryptoCurrency][currentFiatCurrency];
 
     const cryptoValue =
       baseCurrency === 'fiat' ? convert(baseAmount, 1 / price) : baseAmount;
@@ -78,11 +66,11 @@ export default class Converter extends Component {
         <div className="converter__wrapper">
           <CurrencyInput
             value={cryptoValue}
-            currency={tickerData[currentCryptoCurrencyId].name}
+            currency={currentCryptoCurrency}
             onValueChange={this.handleCryptoValueChange}
           />
-          <CryptoCurrencySelect
-            tickerData={tickerData}
+          <Select
+            options={CRYPTO_CURRENCIES}
             onChange={this.onCryptoCurrencyChange}
           />
         </div>

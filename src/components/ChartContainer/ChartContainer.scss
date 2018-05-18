@@ -1,0 +1,15 @@
+.chart__section {
+	display: flex;
+	flex-wrap: wrap;
+	.ui__select {
+		width: 32%;
+		height: 24px;
+		font-size: 14px;
+	}
+}
+
+.chart__wrapper {
+	justify-content: space-between;
+	display: flex;
+	margin-bottom: 10px;
+}

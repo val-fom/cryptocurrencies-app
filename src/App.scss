@@ -9,6 +9,7 @@
 .section {
 	width: 310px;
 	margin: 10px auto;
+	flex-shrink: 0;
 }
 
 .section__header {

@@ -7,8 +7,7 @@ export default class CurrencyInput extends Component {
   };
 
   render() {
-    const { value } = this.props;
-    const { currency } = this.props;
+    const { value, currency } = this.props;
 
     return (
       <Fragment>

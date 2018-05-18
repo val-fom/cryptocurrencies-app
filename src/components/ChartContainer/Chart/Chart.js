@@ -62,6 +62,7 @@ export default class Chart extends Component {
     return (
       <Line
         data={{ labels, datasets: [{ ...chartDatasetBoilerplate, data }] }}
+        options={{ legend: { display: false } }}
       />
     );
   }

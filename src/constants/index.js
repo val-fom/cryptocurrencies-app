@@ -3,8 +3,8 @@ export const CRYPTO_CURRENCIES = ['BTC', 'ETH', 'EOS', 'BCH', 'LTC', 'XRP'];
 export const PERIODS = ['Day', 'Month', 'Year'];
 
 export const chartDatasetBoilerplate = {
-  label: 'My First dataset',
-  fill: false,
+  label: '',
+  fill: true,
   lineTension: 0.0,
   backgroundColor: 'rgba(75,192,192,0.4)',
   borderColor: 'rgba(75,192,192,1)',

@@ -5,6 +5,8 @@ import Select from '../UI/Select';
 
 import { FIAT_CURRENCIES, CRYPTO_CURRENCIES, PERIODS } from '../../constants';
 
+import './ChartContainer.css';
+
 export default class ChartContainer extends Component {
   state = {
     period: 'Day',
@@ -23,21 +25,24 @@ export default class ChartContainer extends Component {
 
     return (
       <section className="section chart__section">
-        <Select
-          placeHolder="Choose period..."
-          options={PERIODS}
-          onChange={this.onPeriodChange}
-        />
-        <Select
-          placeHolder="Choose coin..."
-          options={CRYPTO_CURRENCIES}
-          onChange={this.onCoinChange}
-        />
-        <Select
-          placeHolder="Choose currency..."
-          options={FIAT_CURRENCIES}
-          onChange={this.onCurrencyChange}
-        />
+        <header className="section__header">Cryptocurrency Price Chart</header>
+        <div className="chart__wrapper">
+          <Select
+            placeHolder="Choose period..."
+            options={PERIODS}
+            onChange={this.onPeriodChange}
+          />
+          <Select
+            placeHolder="Choose coin..."
+            options={CRYPTO_CURRENCIES}
+            onChange={this.onCoinChange}
+          />
+          <Select
+            placeHolder="Choose currency..."
+            options={FIAT_CURRENCIES}
+            onChange={this.onCurrencyChange}
+          />
+        </div>
         <Chart queryOptions={{ period, coin, currency }} id={id} />
       </section>
     );
