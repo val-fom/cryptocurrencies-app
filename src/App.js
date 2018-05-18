@@ -4,6 +4,7 @@ import './App.css';
 
 import Markets from './components/Markets';
 import Converter from './components/Converter';
+import ChartContainer from './components/ChartContainer';
 
 export default class App extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class App extends Component {
       <Fragment>
         <Markets />
         <Converter />
+        <ChartContainer />
       </Fragment>
     );
   }
