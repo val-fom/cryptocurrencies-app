@@ -10,13 +10,17 @@ export default class ChartContainer extends Component {
     period: 'Day',
     coin: 'BTC',
     currency: 'USD',
+    id: 0,
   };
 
-  onPeriodChange = period => this.setState({ period });
-  onCoinChange = coin => this.setState({ coin });
-  onCurrencyChange = currency => this.setState({ currency });
+  onPeriodChange = period => this.setState({ period, id: this.state.id + 1 });
+  onCoinChange = coin => this.setState({ coin, id: this.state.id + 1 });
+  onCurrencyChange = currency =>
+    this.setState({ currency, id: this.state.id + 1 });
 
   render() {
+    const { period, coin, currency, id } = this.state;
+
     return (
       <section className="section chart__section">
         <Select
@@ -34,7 +38,7 @@ export default class ChartContainer extends Component {
           options={FIAT_CURRENCIES}
           onChange={this.onCurrencyChange}
         />
-        <Chart queryOptions={{ ...this.state }} />
+        <Chart queryOptions={{ period, coin, currency }} id={id} />
       </section>
     );
   }

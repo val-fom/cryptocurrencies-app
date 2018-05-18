@@ -6,18 +6,12 @@ import { chartDatasetBoilerplate, MONTH_NAMES } from '../../../constants';
 
 export default class Chart extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    return JSON.stringify(prevState.queryOptions) !==
-      JSON.stringify(nextProps.queryOptions)
-      ? {
-          chartData: null,
-          queryOptions: nextProps.queryOptions,
-        }
-      : null;
+    return prevState.id !== nextProps.id ? { id: nextProps.id } : null;
   }
 
   state = {
     chartData: null,
-    queryOptions: null,
+    id: null,
   };
 
   componentDidMount() {
@@ -25,11 +19,11 @@ export default class Chart extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.chartData === null) this._getChartData();
+    if (prevState.id !== this.props.id) this._getChartData();
   }
 
   _getChartData() {
-    const { queryOptions } = this.state;
+    const { queryOptions } = this.props;
 
     getHistoricalData(queryOptions).then(result => {
       const data = [];
