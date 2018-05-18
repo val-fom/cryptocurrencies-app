@@ -18,8 +18,8 @@ export const getHistoricalData = ({ period, coin, currency }) => {
   switch (period) {
     case 'Year':
       histoperiod = 'histoday';
-      limit = '12';
-      aggregate = '30';
+      limit = '52';
+      aggregate = '7';
       break;
     case 'Month':
       histoperiod = 'histoday';

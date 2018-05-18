@@ -34,7 +34,7 @@ export default class Chart extends Component {
         let label;
         switch (queryOptions.period) {
           case 'Year':
-            label = MONTH_NAMES[date.getMonth()];
+            label = `${date.getDate()} ${MONTH_NAMES[date.getMonth()]}`;
             break;
           case 'Month':
             label = `${date.getDate()} ${MONTH_NAMES[date.getMonth()]}`;
