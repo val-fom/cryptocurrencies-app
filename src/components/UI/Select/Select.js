@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class Select extends Component {
   state = {
-    value: 'USD',
+    value: this.props.options[0],
   };
 
   handleChange = e => {
@@ -18,6 +18,9 @@ export default class Select extends Component {
         value={this.state.value}
         onChange={this.handleChange}
       >
+        {this.props.placeHolder ? (
+          <option disabled>{this.props.placeHolder}</option>
+        ) : null}
         {this.props.options.map(option => (
           <option key={option} value={option}>
             {option}

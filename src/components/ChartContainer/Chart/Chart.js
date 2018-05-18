@@ -2,48 +2,73 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 
 import { getHistoricalData } from '../../../api';
-import { chartDatasetBoilerplate } from '../../../constants';
+import { chartDatasetBoilerplate, MONTH_NAMES } from '../../../constants';
 
 export default class Chart extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
-    return null;
+    return JSON.stringify(prevState.queryOptions) !==
+      JSON.stringify(nextProps.queryOptions)
+      ? {
+          chartData: null,
+          queryOptions: nextProps.queryOptions,
+        }
+      : null;
   }
 
   state = {
-    labels: null,
-    data: null,
+    chartData: null,
+    queryOptions: null,
   };
 
   componentDidMount() {
-    // TODO: compontDidUpdate or getDerivedStateFromProps
-    const { period, coin, currency } = this.props;
+    this._getChartData();
+  }
 
-    getHistoricalData(period, coin, currency, 12, 30).then(result => {
-      console.log('result: ', result);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.chartData === null) this._getChartData();
+  }
+
+  _getChartData() {
+    const { queryOptions } = this.state;
+
+    getHistoricalData(queryOptions).then(result => {
       const data = [];
       const labels = [];
 
       result.Data.forEach(candle => {
+        const date = new Date(candle.time * 1000);
+        let label;
+        switch (queryOptions.period) {
+          case 'Year':
+            label = MONTH_NAMES[date.getMonth()];
+            break;
+          case 'Month':
+            label = `${date.getDate()} ${MONTH_NAMES[date.getMonth()]}`;
+            break;
+          case 'Day':
+            label = `${date.getHours()}:00`;
+            break;
+          default:
+            break;
+        }
+
         data.push(candle.close);
-        labels.push(candle.time);
+        labels.push(label);
       });
 
-      this.setState({ labels, data });
+      this.setState({ chartData: { labels, data } });
     });
   }
 
-  componentDidUpdate() {}
-
   render() {
-    const { labels, data } = this.state;
+    if (!this.state.chartData) return null;
+
+    const { labels, data } = this.state.chartData;
 
     return (
-      <div>
-        <h2>Chart</h2>
-        <Line
-          data={{ labels, datasets: [{ ...chartDatasetBoilerplate, data }] }}
-        />
-      </div>
+      <Line
+        data={{ labels, datasets: [{ ...chartDatasetBoilerplate, data }] }}
+      />
     );
   }
 }

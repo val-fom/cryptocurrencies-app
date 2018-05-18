@@ -1,4 +1,6 @@
 export const FIAT_CURRENCIES = ['USD', 'EUR', 'RUB'];
+export const CRYPTO_CURRENCIES = ['BTC', 'ETH'];
+export const PERIODS = ['Day', 'Month', 'Year'];
 
 export const chartDatasetBoilerplate = {
   label: 'My First dataset',
@@ -21,3 +23,18 @@ export const chartDatasetBoilerplate = {
   pointHitRadius: 10,
   data: [],
 };
+
+export const MONTH_NAMES = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
