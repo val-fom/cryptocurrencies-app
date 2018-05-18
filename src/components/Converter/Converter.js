@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { getTickerOfTopSix } from '../../api';
+import * as api from '../../api';
 import { convert } from '../../utils';
-import { FIAT_CURRENCIES } from '../../constants';
+import { FIAT_CURRENCIES, CRYPTO_CURRENCIES } from '../../constants';
 
 import Select from '../UI/Select';
 import CurrencyInput from './CurrencyInput';
@@ -31,7 +31,7 @@ export default class Converter extends Component {
     this.setState({ currentCryptoCurrencyId });
 
   getTickerData(fiatCurrency) {
-    getTickerOfTopSix(fiatCurrency).then(result => {
+    api.getPrices(CRYPTO_CURRENCIES, [fiatCurrency]).then(result => {
       this.setState({
         tickerData: result.data,
         currentFiatCurrency: fiatCurrency,
@@ -48,6 +48,8 @@ export default class Converter extends Component {
   };
 
   render() {
+    // return null; // TODO:
+
     const {
       baseAmount,
       baseCurrency,

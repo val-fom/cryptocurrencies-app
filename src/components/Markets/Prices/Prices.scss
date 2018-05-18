@@ -1,15 +1,15 @@
-.ticker {
+.price {
 	flex: 1 1 90px;
 	padding: 5px;
 	text-align: center;
 }
 
-.ticker__header {
+.price__header {
 	font-weight: bold;
 	white-space: nowrap;
 }
 
-.ticker__price {
+.price__span {
 	display: inline-block;
 	margin: 5px 0;
 }

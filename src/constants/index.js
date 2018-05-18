@@ -1,5 +1,5 @@
-export const FIAT_CURRENCIES = ['USD', 'EUR', 'RUB'];
-export const CRYPTO_CURRENCIES = ['BTC', 'ETH'];
+export const FIAT_CURRENCIES = ['USD', 'EUR', 'UAH'];
+export const CRYPTO_CURRENCIES = ['BTC', 'ETH', 'EOS', 'BCH', 'LTC', 'XRP'];
 export const PERIODS = ['Day', 'Month', 'Year'];
 
 export const chartDatasetBoilerplate = {

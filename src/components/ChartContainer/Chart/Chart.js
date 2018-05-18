@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 
-import { getHistoricalData } from '../../../api';
+import * as api from '../../../api';
 import { chartDatasetBoilerplate, MONTH_NAMES } from '../../../constants';
 
 export default class Chart extends Component {
@@ -25,7 +25,7 @@ export default class Chart extends Component {
   _getChartData() {
     const { queryOptions } = this.props;
 
-    getHistoricalData(queryOptions).then(result => {
+    api.getHistoricalData(queryOptions).then(result => {
       const data = [];
       const labels = [];
 

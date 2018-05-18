@@ -14,7 +14,7 @@ export default class Select extends Component {
   render() {
     return (
       <select
-        className="select"
+        className="ui__select"
         value={this.state.value}
         onChange={this.handleChange}
       >

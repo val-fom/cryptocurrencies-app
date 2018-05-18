@@ -1,10 +1,8 @@
 import { status, json } from '../utils';
 
-export const getTickerOfTopSix = currency =>
+export const getPrices = (coins, currencies) =>
   fetch(
-    `https://api.coinmarketcap.com/v2/ticker/${
-      currency ? `?convert=${currency}&` : '?'
-    }limit=6`
+    `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coins.join()},ETH&tsyms=${currencies.join()}`
   )
     .then(status)
     .then(json)

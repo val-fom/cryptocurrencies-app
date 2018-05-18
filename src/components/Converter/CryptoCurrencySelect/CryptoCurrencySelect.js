@@ -16,7 +16,7 @@ export default class CryptoCurrencySelect extends Component {
 
     return (
       <select
-        className="select"
+        className="ui__select"
         value={this.state.value}
         onChange={this.handleChange}
       >
