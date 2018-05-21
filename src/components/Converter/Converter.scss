@@ -7,6 +7,13 @@
 		height: 24px;
 		font-size: 14px;
 	}
+	.ui__input {
+		flex: 1 1 60%;
+		margin-right: auto;
+		padding-left: 15px;
+		text-align: center;
+		font-size: 14px;
+	}
 }
 
 .converter__wrapper {
@@ -17,4 +24,10 @@
 	margin: 0;
 	flex-wrap: wrap;
 	align-items: center;
+}
+
+.converter__label {
+	flex: 1 0 100%;
+	margin: 5px 0;
+	font-size: 14px;
 }

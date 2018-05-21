@@ -5,7 +5,7 @@ import { convert } from '../../utils';
 import { FIAT_CURRENCIES, CRYPTO_CURRENCIES } from '../../constants';
 
 import Select from '../UI/Select';
-import CurrencyInput from './CurrencyInput';
+import Input from '../UI/Input';
 
 import './Converter.css';
 
@@ -64,10 +64,13 @@ export default class Converter extends Component {
         </header>
 
         <div className="converter__wrapper">
-          <CurrencyInput
+          <label className="converter__label">
+            Enter {currentCryptoCurrency} amount:
+          </label>
+          <Input
+            type="number"
             value={cryptoValue}
-            currency={currentCryptoCurrency}
-            onValueChange={this.handleCryptoValueChange}
+            onChange={this.handleCryptoValueChange}
           />
           <Select
             options={CRYPTO_CURRENCIES}
@@ -76,10 +79,13 @@ export default class Converter extends Component {
         </div>
 
         <div className="converter__wrapper">
-          <CurrencyInput
+          <label className="converter__label">
+            Enter {currentFiatCurrency} amount:
+          </label>
+          <Input
+            type="number"
             value={fiatValue}
-            currency={currentFiatCurrency}
-            onValueChange={this.handleFiatValueChange}
+            onChange={this.handleFiatValueChange}
           />
           <Select
             options={FIAT_CURRENCIES}
