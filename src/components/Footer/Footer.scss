@@ -1,0 +1,32 @@
+.footer__container {
+	margin-top: auto;
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+footer {
+	width: 100%;
+	margin: 1.7rem auto;
+	display: flex;
+	justify-content: center;
+}
+
+.footer__link {
+	padding: 0 5px;
+	transition: 0.2s;
+	position: relative;
+	&:link,
+	&:visited,
+	&:active {
+		text-decoration: none;
+		color: inherit;
+	}
+	&:hover,
+	&:focus {
+		transform: translateY(-1px);
+	}
+	&:active {
+		transform: translateY(1px);
+	}
+}

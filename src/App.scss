@@ -1,6 +1,12 @@
 @import "./utils/mixins";
 
 .root {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.root__container {
 	width: 290px;
 	margin: auto;
 	display: flex;
