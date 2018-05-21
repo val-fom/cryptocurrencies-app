@@ -1,3 +1,5 @@
+@import "../../utils/mixins";
+
 .converter__section {
 	display: flex;
 	flex-wrap: wrap;
@@ -13,6 +15,9 @@
 		padding-left: 15px;
 		text-align: center;
 		font-size: 14px;
+	}
+	@include media-query(1024px) {
+		width: 290px;
 	}
 }
 

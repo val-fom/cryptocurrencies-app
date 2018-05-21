@@ -1,4 +1,7 @@
+@import "../../utils/mixins";
+
 .markets__section {
+	justify-content: center;
 	display: flex;
 	flex-wrap: wrap;
 	.ui__select {
@@ -7,9 +10,13 @@
 		height: 24px;
 		font-size: 14px;
 	}
+	@include media-query(1024px) {
+		width: 290px;
+	}
 }
 
 .markets__price {
+	max-width: 88px;
 	flex: 1 1 90px;
 	padding: 5px;
 	text-align: center;
